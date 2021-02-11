@@ -1,0 +1,17 @@
+<%-include("./components/head")%>
+<body>
+    <%-include("./components/navbar")%>
+    <img src=<%=item.imgURL%> width="250px" height="250px" alt="no img lol">
+    <h1>Item: <%=item.itemName%></h1>
+    <h3>Price: <%=item.itemPrice%></h3>
+    <h3>Date Added: <%=item.dateAdded%></h3>
+
+    <!-- <form action="/items//edit" method="GET">
+        <button>EDIT</button>
+    </form> -->
+
+    <form action="/items/<%=item._id%>/?_method=DELETE" method="POST">
+        <button>DELET DIS</button>
+    </form>
+</body>
+</html>

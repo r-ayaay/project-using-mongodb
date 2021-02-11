@@ -1,0 +1,22 @@
+<%-include("./components/head")%>
+<body>
+    <%-include("./components/navbar")%>
+    <ul>
+        <% for(item of items){ %>
+            <li>
+                <a href="/items/<%=item._id%>">
+                    <img src=<%=item.imgURL%> width="100px" height="100px" alt="no img lol">
+                    <%= item.itemName %>
+                </a>
+            </li>
+        <% } %>
+    </ul>
+
+    <form action="/items" method="POST">
+        <input type="text" name="itemName" placeholder="name" required>
+        <input type="number" name="itemPrice" placeholder="price" required>
+        <input type="text" name="imgURL" placeholder="image URL" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
