@@ -38,18 +38,40 @@ app.post('/items', async(req,res)=>{
     console.log(`${req.body} was added`);
     const newItem = new Item(req.body);
     const dateAdded = new Date();
-    newItem.dateAdded = dateAdded;
+    newItem.dateAdded = `${dateAdded.toDateString()} at ${dateAdded.getHours()}:${dateAdded.getMinutes()}`;
     await newItem.save();
     res.redirect('/items');
 })
 
 
+// app.delete('/items/:itemID', async(req,res)=>{
+//     await Item.findByIdAndDelete(req.params.itemID);
+//     res.redirect('/items');
+// })
+
 app.delete('/items/:itemID', async(req,res)=>{
     await Item.findByIdAndDelete(req.params.itemID);
-    res.redirect('/items');
+    res.redirect('/list');
 })
 
 
-app.get('/testingArea', async(req,res)=>{
-    res.render("testingArea");
+
+// app.get('/testingArea', async(req,res)=>{
+//     const items = await Item.find({});
+//     res.render("testingArea", {items});
+// })
+
+app.get('/list', async(req,res)=>{
+    const items = await Item.find({});
+    res.render("table", {items});
+})
+
+app.get('/list/:itemID', async(req,res)=>{
+    const item = await Item.findOne({_id:req.params.itemID});
+    res.render("itemData", {item});
+})
+
+app.get('list/:itemID/edit', async(req,res)=>{
+    const item = await Item.findOne({_id:req.params.itemID});
+    res.render("edit", {item});
 })
