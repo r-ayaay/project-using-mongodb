@@ -11,6 +11,20 @@ body {
     background-color: #C1BEBC;
 }
 
-/* form {
-    display: inline;
-} */
+.round-border {
+    border-radius: 1em 1em 1em 1em;
+}
+
+input:focus{
+    
+    outline: 0;
+    box-shadow: 2px 2px 5px 0.2rem rgba(53, 53, 53, 0.25);
+}
+.inputMargin *{
+    display: block;
+    margin: 1em 0 0 1em;
+}
+
+input {
+    padding-left: 1em;
+}

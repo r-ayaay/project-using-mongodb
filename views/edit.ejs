@@ -1,14 +1,58 @@
 <%-include("./components/head")%>
 <body>
     <%-include("./components/navbar")%>
-    <h2>Edit stud</h2>
-    <form action="/students/<%=stud[0]._id%>/?_method=PATCH" method="POST">
-        <input type="text" name="name" placeholder="name" value="<%=stud[0].name %>" required>
-        <input type="text" name="course" placeholder="course" value=<%=stud[0].course%> required>
-        <input type="number" name="year" placeholder="year" value=<%=stud[0].year%> required>
-        <input type="number" name="grade" placeholder="grade" value=<%=stud[0].grade%> required>
-        <button type="submit">Update</button>
-    </form>
+    
+    <div style="width: 80%; margin: 0 auto;">
+        <div style="margin: 4.4em;">
+        </div>
+        <div style="border-radius: 1em 1em 1em 1em;">
+            <table class="table">
+                <thead class="green">
+                    <th style="width: 10%; border-radius: 1em 0px 0px 0px;">Update Item</th>
+                    <th></th>
+                    <th style="border-radius: 0px 1em 0px 0px;"></th>
+                </thead>
+                <tbody style="background-color: white">
+                    <tr>
+                        <td style="border-bottom: 0px;">
+                            <form action="/items/<%=item._id%>/?_method=PATCH" method="POST">
+                                Item name
+                        </td>
+                        <td style="border-bottom: 0px;"><input type="text" name="itemName" value="<%=item.itemName %>" required></td>
+                        <td style="border-bottom: 0px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 0px;">
+                                Price: 
+                        </td>
+                        <td style="border-bottom: 0px;">
+                            <input type="number" name="itemPrice" value=<%=item.itemPrice%> required step="0.01">
+                        </td>
+                        <td style="border-bottom: 0px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 0px;">
+                                Image URL:
+                        </td>
+                        <td style="border-bottom: 0px;">
+                            <input type="text" name="imgURL" value=<%=item.imgURL%>>
+                        </td>
+                        <td style="border-bottom: 0px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="border-radius: 0px 0px 0px 1em; border-bottom: 0px;"></td>
+                        <td style="border-bottom: 0px;">
+                            <button type="submit">Update</button>
+                            </form>
+                        </td>
+                        <td style="border-radius: 0px 0px 1em 0px; border-bottom: 0px;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
     
 </body>
 </html>

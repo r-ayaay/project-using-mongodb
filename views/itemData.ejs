@@ -1,17 +1,51 @@
 <%-include("./components/head")%>
 <body>
     <%-include("./components/navbar")%>
-    <img src=<%=item.imgURL%> width="250px" height="250px" alt="no img lol">
-    <h1>Item: <%=item.itemName%></h1>
-    <h3>Price: <%=item.itemPrice%></h3>
-    <h3>Date Added: <%=item.dateAdded%></h3>
+  
+    <div style="width: 80%; margin: 0 auto;">
 
-    <!-- <form action="/items//edit" method="GET">
-        <button>EDIT</button>
-    </form> -->
-
-    <form action="/items/<%=item._id%>/?_method=DELETE" method="POST">
-        <button>DELET DIS</button>
-    </form>
+        <div>
+            <a style="float: left;" href="/list">
+                <button class="btn btn-success" style="margin: 1em 0 1em auto; border-radius: 1em; background-color: #589636;">go back</button>
+            </a>
+        
+        </div>
+        
+        <div style="border-radius: 1em 1em 1em 1em;">
+            <table class="table">
+                <thead class="green">
+                    <th style="border-radius: 1em 0px 0px 0px;">ID: <%=item._id%></th>
+                    <th></th>
+                    <th style="border-radius: 0px 1em 0px 0px;"></th>
+                </thead>
+                <tbody style="background-color: white">
+                    <tr>
+                        <td width="300px" rowspan="4" style="border-radius: 0px 0px 0px 1em; border-bottom: 0px;">
+                            <img width="200x" height="200px" src="<%=item.imgURL%>" alt="broken image link">
+                        </td>
+                        <td style="border-bottom: 0px;"></td>
+                        <td rowspan="4" style="border-radius: 0px 0px 1em 0px; border-bottom: 0px;">
+                            <form style="display: inline;" action="/items/<%=item._id%>/edit" method="GET">
+                                <button class="btn btn-outline-primary" style=" border-radius: 1em;">edit</button>
+                            </form>
+                            <form style="display: inline;"action="/items/<%=item._id%>/?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete?');">
+                                <button class="btn btn-outline-danger" style=" border-radius: 1em;">delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 0px;">Item name: <%= item.itemName %></td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 0px;">Price: PHP <%= item.itemPrice %></td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom: 0px;">Date added/updated: <%= item.dateAdded %></td>    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
 </body>
 </html>

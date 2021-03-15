@@ -1,0 +1,34 @@
+<%-include("./components/head")%>
+<body>
+    <%-include("./components/navbar")%>
+    <div style="width: 80%; margin: 0 auto;">
+        
+
+        <div>
+            <a style="float: left;" href="/list">
+                <button class="btn btn-success" style="margin: 1em 0 1em auto;; border-radius: 1em; background-color: #589636;">go back</button>
+            </a>
+        </div>
+
+        <div style="border-radius: 1em 1em 1em 1em;">
+            <table class="table table-striped" style="border-radius: 1em 1em 1em 1em;">
+                <thead class="green">
+                    <tr>
+                        <th scope="col" style="border-radius: 1em 1em 0 0;">Add an item</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: white">
+                    <tr>
+                        <td style="border-radius: 0 0 1em 1em; border-bottom: 0px;"> 
+                            <form class="inputMargin" action="/items" method="POST" autocomplete="off">
+                                <input style="display: inline;" class="round-border border border-success" type="text" name="itemName" placeholder="name" required>
+                                <input style="display: inline;" class="round-border border border-success" type="number" step="0.01" name="itemPrice" placeholder="price" required>
+                                <input style="display: inline; width: 35%;" class="round-border border border-success" type="text" name="imgURL" placeholder="image URL (default img will be added if left empty)" required>
+                                <button style="display: inline; margin: 0 0 0 1em;" class="btn btn-success" style="border-radius: 1em; background-color: #589636;" type="submit">Submit</button>
+                            </form>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

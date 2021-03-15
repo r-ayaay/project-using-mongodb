@@ -12,7 +12,7 @@ connectDB();
 
 const port = 3000;
 
-app.listen(port, ()=>{console.log("Connection to Server succ");})
+app.listen(port, ()=>{console.log("Connection to Server successful!");})
 
 app.use(express.urlencoded({extended: true}));
 
@@ -39,8 +39,11 @@ app.post('/items', async(req,res)=>{
     const newItem = new Item(req.body);
     const dateAdded = new Date();
     newItem.dateAdded = `${dateAdded.toDateString()} at ${dateAdded.getHours()}:${dateAdded.getMinutes()}`;
+    if(newItem.imgURL == ""){
+        newItem.imgURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png";
+    }
     await newItem.save();
-    res.redirect('/items');
+    res.redirect('/list');
 })
 
 
@@ -71,7 +74,37 @@ app.get('/list/:itemID', async(req,res)=>{
     res.render("itemData", {item});
 })
 
-app.get('list/:itemID/edit', async(req,res)=>{
+app.get('/list/:itemID/edit', async(req,res)=>{
     const item = await Item.findOne({_id:req.params.itemID});
     res.render("edit", {item});
+})
+
+app.get('/addItem', (req,res)=>{
+    res.render("addItem");
+})
+
+app.delete('/list/:itemID', async(req,res)=>{
+    await Item.findByIdAndDelete(req.params.itemID);
+    res.redirect('/list');
+})
+
+app.patch('/items/:itemID', async(req,res)=>{
+    const dateUpdated = new Date();
+    const dateUpdatedString = `${dateUpdated.toDateString()} at ${dateUpdated.getHours()}:${dateUpdated.getMinutes()}`;
+    if(req.body.imgURL == ""){
+            req.body.imgURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png";
+    }
+    await Item.updateOne({_id:req.params.itemID}, {$set:req.body, dateAdded: dateUpdatedString});
+    console.log("UPDATE");
+    
+    res.redirect(`/items/${req.params.itemID}`);
+})
+
+app.get('/items/:itemID/edit', async(req,res)=>{
+    const item = await Item.findOne({_id:req.params.itemID});
+    res.render("edit", {item});
+})
+app.delete('/items/:itemID', async(req,res)=>{
+    await Item.findByIdAndDelete(req.params.itemID);
+    res.redirect('/list');
 })
